@@ -51,8 +51,10 @@ export class QlbcComponent implements OnInit {
     this.crudUser.read_Users().subscribe(data => { 
       this.users = data.map(e => {
           return {
+            id: e.payload.doc.id,
             userid:e.payload.doc.data()['userID'],
-            email:e.payload.doc.data()['email']
+            email:e.payload.doc.data()['email'],
+            rating: e.payload.doc.data()['rating']
           };
       })
     });
@@ -66,15 +68,21 @@ export class QlbcComponent implements OnInit {
     this.listReport = [];
     var useremail = "";
     var reporteremail = "";
+    var reporterrating;
+    var dociduser ="";
+    var docidreporter="";
     for(var i =0;i < this.reports.length;i++){
       for(var j =0;j<this.products.length;j++){
         if(this.reports[i].masp == this.products[j].id){
           for(var m = 0;m<this.users.length;m++){
             if(this.reports[i].userid == this.users[m].userid){
               useremail = this.users[m].email;
+              dociduser=this.users[m].id;
             }
             if(this.reports[i].reporterid == this.users[m].userid){
               reporteremail = this.users[m].email;
+              docidreporter=this.users[m].id;
+              reporterrating=this.users[m].rating;
             }
           }
           this.listReport.push({
@@ -85,7 +93,11 @@ export class QlbcComponent implements OnInit {
             useremail: useremail,
             ngaytocao: this.reports[i].ngaytocao,
             reporteremail: reporteremail,
-            content: this.reports[i].content
+            content: this.reports[i].content,
+            dociduser: dociduser,
+            docidreporter: docidreporter,
+            docidreport: this.reports[i].id,
+            reporterrating: reporterrating
           })
         }
       }
@@ -95,5 +107,24 @@ export class QlbcComponent implements OnInit {
   async showReport(){
     await this.promise(3000);
     await this.getReports();
+  }
+
+  confirmReport(dociduser,docidreport){
+    let record={};
+    record['blockAccount']=true;
+    record['rating']=1;
+    this.crudUser.update_Users(dociduser,record);
+    this.crudReport.delete_Reports(docidreport);
+  }
+  rejectReport(docidreporter,docidreport,reporterrating){
+    let record={};
+    if(reporterrating === 0){
+      record['rating']=0;
+      record['blockAccount']=true;
+    }else if(reporterrating >0){
+      record['rating']=reporterrating-1;
+    }
+    this.crudUser.update_Users(docidreporter,record);
+    this.crudReport.delete_Reports(docidreport);
   }
 }

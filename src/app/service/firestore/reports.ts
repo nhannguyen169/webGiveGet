@@ -19,7 +19,9 @@ export class CrudReport {
 
  
   delete_Reports(record_id) {
-    this.firestore.collection('reports').doc(record_id).delete();
+    this.firestore.collection('reports').doc(record_id).delete().then(res=>{
+      location.reload();
+    });
   }
 
  

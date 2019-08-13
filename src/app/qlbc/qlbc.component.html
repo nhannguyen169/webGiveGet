@@ -34,8 +34,8 @@
                                         <td>{{row.ngaytocao | date:'dd-MM-yyyy'}}</td>
                                         <td>{{row.content}}</td>
                                         <td>
-                                            <button class="info-btn"><i class="fa fa-check"></i></button>
-                                            <button class="danger-btn"><i class="fa fa-times-circle"></i></button>
+                                            <button class="info-btn" (click)="confirmReport(row.dociduser,row.docidreport)"><i class="fa fa-check"></i></button>
+                                            <button class="danger-btn" (click)="rejectReport(row.docidreporter,row.docidreport,row.reporterrating)"><i class="fa fa-times-circle"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
