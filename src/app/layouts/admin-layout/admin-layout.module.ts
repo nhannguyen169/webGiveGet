@@ -16,7 +16,6 @@ import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
-import { UpgradeComponent } from '../../upgrade/upgrade.component';
 
 
 @NgModule({
@@ -36,8 +35,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     TypographyComponent,
     IconsComponent,
     MapsComponent,
-    NotificationsComponent,
-    UpgradeComponent
+    NotificationsComponent
   ]
 })
 
