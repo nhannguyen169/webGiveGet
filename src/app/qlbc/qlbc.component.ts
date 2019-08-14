@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudProduct } from '../service/firestore/product';
 import { CrudReport } from '../service/firestore/reports';
 import { CrudUser } from '../service/firestore/users';
-import { resolve } from 'path';
+import { Notification} from '../service/firestore/notification';
 
 
 @Component({
@@ -11,14 +11,15 @@ import { resolve } from 'path';
   styleUrls: ['./qlbc.component.css']
 })
 export class QlbcComponent implements OnInit {
-
+  p:any;
   public products: any;
   public users: any;
   public reports: any;
   constructor(
     private crudProduct: CrudProduct,
     private crudUser: CrudUser,
-    private crudReport: CrudReport
+    private crudReport: CrudReport,
+    private notication: Notification
   ) { }
   
   filter: string;
@@ -110,18 +111,36 @@ export class QlbcComponent implements OnInit {
   }
 
   confirmReport(dociduser,docidreport){
+    var username;
+    var message;
     let record={};
     record['blockAccount']=true;
     record['rating']=1;
     this.crudUser.update_Users(dociduser,record);
     this.crudReport.delete_Reports(docidreport);
+    for(var m = 0;m<this.users.length;m++){
+      if(this.users[m].id == dociduser){
+        username = this.users[m].email;
+      }
+    }
+    message = "Tài khoản "+username+" đã bị chặn khỏi ứng dụng vì vi phạm điều luật sử dụng !";
+    this.notication.sendNotification("abort","Thông báo tài khoản vi phạm",message);
   }
   rejectReport(docidreporter,docidreport,reporterrating){
     let record={};
-    if(reporterrating === 0){
+    var username;
+    var message;
+    if(reporterrating === 0 || reporterrating === 1){
       record['rating']=0;
       record['blockAccount']=true;
-    }else if(reporterrating >0){
+      for(var m = 0;m<this.users.length;m++){
+        if(this.users[m].id == docidreporter){
+          username = this.users[m].email;
+        }
+      }
+      message = "Tài khoản "+username+" đã bị chặn khỏi ứng dụng vì tố cáo bài đăng với lý do không chính xác !";
+      this.notication.sendNotification("abort","Thông báo tài khoản vi phạm",message);
+    }else if(reporterrating >1){
       record['rating']=reporterrating-1;
     }
     this.crudUser.update_Users(docidreporter,record);

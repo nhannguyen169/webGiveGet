@@ -1,0 +1,10 @@
+.danger-btn{
+    background-color: #FF0000;
+    border-radius: 10px;
+    color: white;
+    width: 50px;
+}
+td{
+    max-width: 200px;
+    font-size: 12px;
+}

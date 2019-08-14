@@ -13,7 +13,7 @@ export class CrudUser {
   
  
   read_Users() {
-    return this.firestore.collection('user',ref => ref.orderBy('createDate', 'desc')).snapshotChanges();
+    return this.firestore.collection('user',ref => ref.orderBy('createDate', 'asc')).snapshotChanges();
   }
 
   update_Users(recordID,record){
