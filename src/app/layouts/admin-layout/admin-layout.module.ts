@@ -15,7 +15,7 @@ import { QlspComponent } from '../../qlsp/qlsp.component';
 import { QluserComponent } from '../../qluser/qluser.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
-import { NotificationsComponent } from '../../notifications/notifications.component';
+import { QllsgdComponent } from '../../qllsgd/qllsgd.component';
 
 
 @NgModule({
@@ -35,7 +35,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
     QluserComponent,
     IconsComponent,
     MapsComponent,
-    NotificationsComponent
+    QllsgdComponent
   ]
 })
 

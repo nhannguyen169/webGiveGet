@@ -1,0 +1,57 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Quản lý lịch sử giao dịch</h4>
+                        <p class="category">Tìm lịch sử giao dịch dưới đây</p>
+                        <input class="form-control" style="width: 50%;" type="text" placeholder="Search......." [(ngModel)]="filter">
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table id="tbl-prod" class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Hình ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Loại sản phẩm</th>
+                                        <th>Ngày đăng</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Cách thức nhận</th>
+                                        <th>Người cho</th>
+                                        <th>Người nhận</th>
+                                        <th>Tùy chọn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of HistoryProduct| filter:filter | paginate: { itemsPerPage: 6, currentPage: p }">
+                                        <td><img class="img-prod" src="{{row.img}}"></td>
+                                        <td>{{row.tensp}}</td>
+                                        <td>{{row.loaisp}}</td>
+                                        <td>{{row.ngaytao | date:'dd-MM-yyyy' }}</td>
+                                        <td>{{row.ngayketthuc | date:'dd-MM-yyyy' }}</td>
+                                        <td *ngIf="row.method == 'false'">Người dùng tự chọn</td>
+                                        <td *ngIf="row.method == 'true'">Hệ thống tự chọn</td>
+                                        <td>
+                                            <span *ngFor="let u of users">
+                                                <span *ngIf="row.nguoicho == u.userid">{{u.email}}</span>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span *ngFor="let u of users">
+                                                <span *ngIf="row.nguoinhan == u.userid">{{u.email}}</span>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="danger-btn">Xóa</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
