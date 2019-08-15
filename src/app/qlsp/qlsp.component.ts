@@ -38,5 +38,7 @@ export class QlspComponent implements OnInit {
       });
      this.filter = "";
   }
-
+  deleteProduct(idpro){
+    this.crudProduct.delete_Product(idpro);
+  }
 }

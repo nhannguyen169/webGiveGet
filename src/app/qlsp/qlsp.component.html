@@ -30,7 +30,7 @@
                                         <td *ngIf="row.method == 'true'">Hệ thống tự chọn</td>
                                         <td>
                                             <button class="info-btn">Chi tiết</button>
-                                            <button class="danger-btn">Xóa</button>
+                                            <button class="danger-btn" (click)="deleteProduct(row.id)">Xóa</button>
                                         </td>
                                     </tr>
                                 </tbody>

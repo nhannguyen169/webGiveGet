@@ -35,8 +35,11 @@
                                         <td>{{row.numUserRate}}</td>
                                         <td>{{row.rating}}</td>
                                         <td>{{row.date | date:'dd-MM-yyyy' }}</td>
-                                        <td>
-                                            <button class="danger-btn">Chặn</button>
+                                        <td *ngIf="row.blockAccount==false">
+                                            <button class="danger-btn" (click)="blockUser(row.id)">Chặn</button>
+                                        </td>
+                                        <td *ngIf="row.blockAccount==true">
+                                            <button class="info-btn" (click)="unblockUser(row.id)">Hủy Chặn</button>
                                         </td>
                                     </tr>
                                 </tbody>

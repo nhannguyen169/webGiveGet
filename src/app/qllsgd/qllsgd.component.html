@@ -20,7 +20,6 @@
                                         <th>Cách thức nhận</th>
                                         <th>Người cho</th>
                                         <th>Người nhận</th>
-                                        <th>Tùy chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,9 +40,6 @@
                                             <span *ngFor="let u of users">
                                                 <span *ngIf="row.nguoinhan == u.userid">{{u.email}}</span>
                                             </span>
-                                        </td>
-                                        <td>
-                                            <button class="danger-btn">Xóa</button>
                                         </td>
                                     </tr>
                                 </tbody>
