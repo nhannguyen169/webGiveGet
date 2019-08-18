@@ -13,8 +13,6 @@ import { HomeComponent } from '../../home/home.component';
 import { QlbcComponent } from '../../qlbc/qlbc.component';
 import { QlspComponent } from '../../qlsp/qlsp.component';
 import { QluserComponent } from '../../qluser/qluser.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
 import { QllsgdComponent } from '../../qllsgd/qllsgd.component';
 
 
@@ -33,8 +31,6 @@ import { QllsgdComponent } from '../../qllsgd/qllsgd.component';
     QlbcComponent,
     QlspComponent,
     QluserComponent,
-    IconsComponent,
-    MapsComponent,
     QllsgdComponent
   ]
 })
